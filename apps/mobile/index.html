@@ -6,30 +6,29 @@
   <title>NER Sahayak Mobile</title>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#1d4ed8">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #0B1220;
-      --surface: #141B2E;
-      --signal-critical: #DC2626;
-      --signal-watch: #D97706;
-      --signal-clear: #15803D;
-      --paper: #F1EDE4;
-      --primary: #8b5cf6;
-      --secondary: #3b82f6;
-      --bg-gradient: var(--ink);
-      --glass-bg: var(--surface);
-      --glass-border: rgba(241, 237, 228, 0.1);
-      --text-main: var(--paper);
-      --text-muted: #94a3b8;
+      --void: #0e1012;
+      --panel: #15171b;
+      --raised: #1c1f24;
+      --overlay: #23262d;
+      --text-primary: #ffffff;
+      --text-body: #a0aaba;
+      --text-caption: #8b96aa;
+      --accent: #007afc;
+      --status-critical: #ef4444;
+      --status-watch: #f59e0b;
+      --status-clear: #228a56;
+      --glass-border: rgba(255, 255, 255, 0.05);
     }
     
     body {
-      font-family: 'Inter', -apple-system, sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
       margin: 0;
       padding: 0;
-      background: var(--bg-gradient);
-      color: var(--text-main);
+      background: var(--void);
+      color: var(--text-body);
       min-height: 100vh;
     }
 
@@ -39,16 +38,15 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: var(--surface);
+      background: var(--panel);
       border-bottom: 1px solid var(--glass-border);
     }
     
     #app-title {
-      background: linear-gradient(to right, #60a5fa, #c084fc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--text-primary);
       font-size: 1.5rem;
       margin: 0;
+      font-weight: 700;
     }
 
     .container {
@@ -59,19 +57,18 @@
 
     /* Glassmorphism Card System */
     .glass-card {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
+      background: var(--panel);
+      border-radius: 24px;
       padding: 1.5rem;
       margin-bottom: 1.5rem;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      /* no drop shadow per design system */
     }
     
     .glass-card h2 {
       margin-top: 0;
       font-size: 1.25rem;
-      font-weight: 500;
-      color: white;
+      font-weight: 700;
+      color: var(--text-primary);
       margin-bottom: 1.2rem;
     }
 
@@ -81,74 +78,64 @@
       display: flex;
       justify-content: space-between;
       padding: 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      background: rgba(0, 0, 0, 0.2);
-      border-radius: 8px;
+      background: var(--raised);
+      border-radius: 4px;
       margin-bottom: 0.5rem;
     }
-    .status-isolated { border-left: 4px solid var(--signal-critical); }
-    .status-degraded { border-left: 4px solid var(--signal-watch); }
-    .status-connected { border-left: 4px solid var(--signal-clear); }
+    .status-isolated { border-left: 4px solid var(--status-critical); }
+    .status-degraded { border-left: 4px solid var(--status-watch); }
+    .status-connected { border-left: 4px solid var(--status-clear); }
 
     /* Forms and Inputs */
     input, select, textarea {
       width: 100%;
       padding: 0.8rem 1rem;
       margin-bottom: 1.2rem;
-      background: rgba(0, 0, 0, 0.2);
+      background: var(--raised);
       border: 1px solid var(--glass-border);
       border-radius: 12px;
-      color: white;
-      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      font-family: 'Plus Jakarta Sans', sans-serif;
       box-sizing: border-box;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
     
     input:focus, select:focus, textarea:focus {
       outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+      border-color: var(--accent);
     }
 
     input::placeholder, textarea::placeholder {
-      color: #64748b;
+      color: var(--text-caption);
     }
     
     select option {
-      background: #1e293b;
-      color: white;
+      background: var(--raised);
+      color: var(--text-primary);
     }
 
     /* Buttons */
     button {
-      background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+      background: var(--accent);
       color: white;
       border: none;
       padding: 1rem;
-      border-radius: 12px;
+      border-radius: 100px;
       font-size: 1.1rem;
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
       width: 100%;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: opacity 0.2s ease;
     }
     
     button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
-    }
-    
-    button:active {
-      transform: translateY(0);
+      opacity: 0.9;
     }
     
     button:disabled { 
-      background: #475569;
-      box-shadow: none;
+      background: var(--raised);
+      color: var(--text-caption);
       cursor: not-allowed;
-      transform: none;
     }
 
     /* Range Slider Styling */
@@ -163,7 +150,7 @@
       height: 20px;
       width: 20px;
       border-radius: 50%;
-      background: var(--primary);
+      background: var(--accent);
       cursor: pointer;
       margin-top: -8px;
     }
@@ -171,7 +158,7 @@
       width: 100%;
       height: 4px;
       cursor: pointer;
-      background: rgba(255,255,255,0.2);
+      background: var(--raised);
       border-radius: 2px;
     }
 
@@ -181,12 +168,13 @@
     #pending-badge {
       font-size: 0.75rem;
       font-weight: 700;
-      background: #f59e0b;
-      color: #78350f;
+      text-transform: uppercase;
+      letter-spacing: 0.7em;
+      background: var(--status-watch);
+      color: #000;
       padding: 0.3rem 0.6rem;
-      border-radius: 20px;
+      border-radius: 4px;
       margin-right: 0.5rem;
-      box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2);
     }
     
     .header-controls {
@@ -198,15 +186,18 @@
       width: auto;
       margin: 0;
       padding: 0.3rem 0.5rem;
-      border-radius: 8px;
+      border-radius: 4px;
       font-size: 0.85rem;
+      background: var(--raised);
+      color: var(--text-primary);
     }
     
     label {
       display: block;
       margin-bottom: 0.5rem;
-      color: var(--text-muted);
+      color: var(--text-body);
       font-size: 0.9rem;
+      font-weight: 500;
     }
   </style>
 </head>
@@ -303,7 +294,7 @@
       
       <label id="severity-label">Severity Level (1-5)</label>
       <input type="range" id="report-severity" min="1" max="5" value="3">
-      <div id="risk-preview" style="margin-bottom:1.5rem; font-size:0.9rem; color:var(--text-muted); font-weight: 500;">Moderate Risk</div>
+      <div id="risk-preview" style="margin-bottom:1.5rem; font-size:0.9rem; color:var(--text-body); font-weight: 500;">Moderate Risk</div>
       
       <label>Photo Evidence (Optional)</label>
       <input type="file" id="report-photo" accept="image/*" capture="environment" style="background: transparent; border: none; padding: 0.5rem 0;" />
@@ -313,8 +304,8 @@
       <textarea id="report-desc" placeholder="Describe the incident..." rows="3"></textarea>
 
       <!-- GPS status: shown live as location is captured, non-blocking -->
-      <div id="gps-status" style="margin-bottom:1.2rem; font-size:0.82rem; color:var(--text-muted); display:flex; align-items:center; gap:0.5rem;">
-        <span id="gps-dot" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#64748b; flex-shrink:0;"></span>
+      <div id="gps-status" style="margin-bottom:1.2rem; font-size:0.82rem; color:var(--text-caption); display:flex; align-items:center; gap:0.5rem;">
+        <span id="gps-dot" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--text-caption); flex-shrink:0;"></span>
         <span id="gps-label">📍 Waiting for GPS...</span>
       </div>
       
@@ -323,17 +314,17 @@
   </div>
 
   <!-- Confirmation card: shown after successful submit, hidden otherwise -->
-  <div id="confirm-overlay" class="container hidden" style="position:fixed; inset:0; background:rgba(11,18,32,0.95); z-index:999; display:flex; align-items:center; justify-content:center; padding:1.2rem;">
+  <div id="confirm-overlay" class="container hidden" style="position:fixed; inset:0; background:rgba(14,16,18,0.95); z-index:999; display:flex; align-items:center; justify-content:center; padding:1.2rem;">
     <div class="glass-card" style="width:100%; max-width:480px; margin:0;">
       <div style="text-align:center; margin-bottom:1.5rem;">
         <div style="font-size:2.5rem; margin-bottom:0.5rem;">✅</div>
-        <h2 style="margin:0; color:white; font-size:1.3rem;">Report Filed</h2>
-        <p style="color:var(--text-muted); font-size:0.85rem; margin:0.5rem 0 0;">Stored locally — will sync when online</p>
+        <h2 style="margin:0; color:var(--text-primary); font-size:1.3rem;">Report Filed</h2>
+        <p style="color:var(--text-caption); font-size:0.85rem; margin:0.5rem 0 0;">Stored locally — will sync when online</p>
       </div>
       <img id="confirm-photo" src="" alt="" style="display:none; width:100%; max-height:160px; object-fit:cover; border-radius:10px; margin-bottom:1rem; border:1px solid var(--glass-border);" />
-      <div id="confirm-details" style="background:rgba(0,0,0,0.2); border-radius:12px; padding:1rem; margin-bottom:1.2rem; font-size:0.875rem; line-height:1.7; color:var(--text-muted);"></div>
+      <div id="confirm-details" style="background:var(--raised); border-radius:12px; padding:1rem; margin-bottom:1.2rem; font-size:0.875rem; line-height:1.7; color:var(--text-body);"></div>
       <button id="confirm-share" style="margin-bottom:0.75rem;">📤 Share Report</button>
-      <button id="confirm-close" style="background:rgba(255,255,255,0.08); border:1px solid var(--glass-border); box-shadow:none;">Back to App</button>
+      <button id="confirm-close" style="background:var(--raised); border:1px solid var(--glass-border); color:var(--text-primary);">Back to App</button>
     </div>
   </div>
 

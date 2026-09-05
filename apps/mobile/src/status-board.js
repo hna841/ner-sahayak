@@ -16,8 +16,8 @@ export async function renderStatusBoard() {
     const score = d.currentRiskScore || 0;
     const isCritical = score >= 0.7;
     const isWatch = score >= 0.3 && score < 0.7;
-    const color = isCritical ? 'var(--signal-critical)' : (isWatch ? 'var(--signal-watch)' : 'var(--signal-clear)');
-    const filter = isCritical ? 'filter="drop-shadow(0 0 4px #ef4444)"' : '';
+    const color = isCritical ? 'var(--status-critical)' : (isWatch ? 'var(--status-watch)' : 'var(--status-clear)');
+    const filter = isCritical ? 'filter="drop-shadow(0 0 4px var(--status-critical))"' : '';
     
     // Circle r=40, circumference = 2 * PI * 40 = 251.2
     const circumference = 251.2;
@@ -28,7 +28,7 @@ export async function renderStatusBoard() {
     return `
       <div class="gauge-container">
         <svg viewBox="0 0 100 100" width="100" height="100">
-          <circle cx="50" cy="50" r="40" fill="transparent" stroke="var(--glass-border)" stroke-width="8" transform="rotate(-90 50 50)" />
+          <circle cx="50" cy="50" r="40" fill="transparent" stroke="var(--panel)" stroke-width="8" transform="rotate(-90 50 50)" />
           <circle 
             class="gauge-arc" id="gauge-arc-${i}"
             cx="50" cy="50" r="40" fill="transparent" 

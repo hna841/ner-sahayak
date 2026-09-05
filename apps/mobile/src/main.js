@@ -72,12 +72,12 @@ function showConfirmation({ type, severity, description, coords, photoObjectUrl 
   const now = new Date().toLocaleString();
 
   details.innerHTML = `
-    <div><strong style="color:white">Type:</strong> ${typeLabel}</div>
-    <div><strong style="color:white">Severity:</strong> ${severity}/5</div>
-    <div><strong style="color:white">Description:</strong> ${description}</div>
-    <div><strong style="color:white">GPS:</strong> ${locStr}</div>
-    <div><strong style="color:white">Filed at:</strong> ${now}</div>
-    <div style="margin-top:0.5rem;font-size:0.75rem;color:#f59e0b;">⏳ Stored locally — will sync to control room when online</div>
+    <div><strong style="color:var(--text-primary)">Type:</strong> ${typeLabel}</div>
+    <div><strong style="color:var(--text-primary)">Severity:</strong> ${severity}/5</div>
+    <div><strong style="color:var(--text-primary)">Description:</strong> ${description}</div>
+    <div><strong style="color:var(--text-primary)">GPS:</strong> ${locStr}</div>
+    <div><strong style="color:var(--text-primary)">Filed at:</strong> ${now}</div>
+    <div style="margin-top:0.5rem;font-size:0.75rem;color:var(--status-watch);">⏳ Stored locally — will sync to control room when online</div>
   `;
 
   // Share text works fully offline (navigator.share for text needs no network)

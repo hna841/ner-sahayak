@@ -50,13 +50,13 @@ function ToastBanner({ toast, onDismiss }: { toast: Toast; onDismiss: (id: numbe
   }, [toast.id, onDismiss]);
 
   return (
-    <div className="flex items-center gap-3 bg-red-600 text-white px-4 py-3 rounded-lg shadow-lg mb-2 animate-pulse">
+    <div className="flex items-center gap-3 bg-panel text-primary px-4 py-3 rounded-md mb-2 animate-pulse border-l-4 border-status-watch">
       <span className="text-xl">🚨</span>
       <div className="flex-1">
         <div className="font-semibold text-sm">NEW REPORT — {typeLabel}</div>
-        <div className="text-xs opacity-80">Severity {toast.report.severity}/5 · {toast.report.corridorId?.toUpperCase()}</div>
+        <div className="text-xs text-caption">Severity {toast.report.severity}/5 · {toast.report.corridorId?.toUpperCase()}</div>
       </div>
-      <button onClick={() => onDismiss(toast.id)} className="text-white opacity-70 hover:opacity-100 text-lg leading-none">×</button>
+      <button onClick={() => onDismiss(toast.id)} className="text-caption hover:text-primary text-lg leading-none transition-colors">×</button>
     </div>
   );
 }
@@ -64,10 +64,10 @@ function ToastBanner({ toast, onDismiss }: { toast: Toast; onDismiss: (id: numbe
 // ── Photo modal ───────────────────────────────────────────────────────────────
 function PhotoModal({ url, onClose }: { url: string; onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-void/90" onClick={onClose}>
       <div className="relative max-w-2xl w-full mx-4" onClick={e => e.stopPropagation()}>
-        <button onClick={onClose} className="absolute -top-10 right-0 text-white text-3xl leading-none">×</button>
-        <img src={url} alt="Incident photo" className="w-full rounded-xl shadow-2xl" />
+        <button onClick={onClose} className="absolute -top-10 right-0 text-primary text-3xl leading-none">×</button>
+        <img src={url} alt="Incident photo" className="w-full rounded-[24px] bg-panel" />
       </div>
     </div>
   );
@@ -161,15 +161,15 @@ export default function ReportsPage() {
       {photoModal && <PhotoModal url={photoModal} onClose={() => setPhotoModal(null)} />}
 
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Incident Reports</h1>
+        <h1 className="text-3xl font-bold text-primary">Incident Reports</h1>
 
         <div className="flex items-center gap-3">
-          <label htmlFor="status-filter" className="text-sm font-medium text-gray-700">Filter Status:</label>
+          <label htmlFor="status-filter" className="text-sm font-medium text-caption">Filter Status:</label>
           <select
             id="status-filter"
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2 border outline-none"
+            className="bg-raised text-primary rounded-md focus:ring-accent focus:border-accent sm:text-sm p-2 outline-none border-none"
           >
             <option value="all">All Incidents</option>
             <option value="unconfirmed">Unconfirmed</option>
@@ -179,41 +179,41 @@ export default function ReportsPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-panel rounded-[24px] overflow-hidden">
         {loading ? (
-          <div className="p-12 text-center text-gray-500">Loading reports...</div>
+          <div className="p-12 text-center text-caption">Loading reports...</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-overlay">
+              <thead className="bg-raised">
                 <tr>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type / ID</th>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">GPS Location</th>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Photo</th>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sev</th>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
-                  <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-bold text-caption uppercase tracking-wider">Type / ID</th>
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-bold text-caption uppercase tracking-wider">GPS Location</th>
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-bold text-caption uppercase tracking-wider">Photo</th>
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-bold text-caption uppercase tracking-wider">Description</th>
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-bold text-caption uppercase tracking-wider">Sev</th>
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-bold text-caption uppercase tracking-wider">Status</th>
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-bold text-caption uppercase tracking-wider">Time</th>
+                  <th scope="col" className="px-4 py-3 text-left text-xs font-bold text-caption uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-panel divide-y divide-overlay">
                 {reports.length === 0 ? (
                   <tr>
-                    <td colSpan={8} className="px-6 py-8 text-center text-gray-500">No reports found.</td>
+                    <td colSpan={8} className="px-6 py-8 text-center text-caption">No reports found.</td>
                   </tr>
                 ) : (
                   reports.map((report) => (
-                    <tr key={report.id} className={`hover:bg-gray-50 transition-colors ${isNew(report) ? 'bg-red-50' : ''}`}>
+                    <tr key={report.id} className={`hover:bg-raised transition-colors ${isNew(report) ? 'bg-raised/50 border-l-4 border-status-watch' : ''}`}>
                       {/* Type / ID */}
                       <td className="px-4 py-4 whitespace-nowrap">
                         <div className="flex items-center gap-1.5">
                           {isNew(report) && (
-                            <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-bold bg-red-600 text-white animate-pulse">NEW</span>
+                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-bold bg-status-watch text-void uppercase tracking-[0.7em] animate-pulse">NEW</span>
                           )}
                           <div>
-                            <div className="text-sm font-medium text-gray-900 capitalize">{report.type.replace(/-/g, ' ')}</div>
-                            <div className="text-xs text-gray-400 font-mono">{report.id.substring(0, 8)}…</div>
+                            <div className="text-sm font-medium text-primary capitalize">{report.type.replace(/-/g, ' ')}</div>
+                            <div className="text-xs text-caption font-mono">{report.id.substring(0, 8)}…</div>
                           </div>
                         </div>
                       </td>
@@ -225,12 +225,12 @@ export default function ReportsPage() {
                             href={`https://www.google.com/maps?q=${report.lat},${report.lng}`}
                             target="_blank"
                             rel="noreferrer"
-                            className="text-blue-600 hover:underline font-mono text-xs"
+                            className="text-accent hover:underline font-mono text-xs"
                           >
                             {report.lat.toFixed(4)}, {report.lng.toFixed(4)}
                           </a>
                         ) : (
-                          <span className="text-gray-400 text-xs">No GPS</span>
+                          <span className="text-caption text-xs">No GPS</span>
                         )}
                       </td>
 
@@ -241,45 +241,45 @@ export default function ReportsPage() {
                             <img
                               src={report.photoUrl}
                               alt="Incident"
-                              className="h-10 w-10 rounded object-cover border border-gray-200 hover:ring-2 hover:ring-blue-400 transition-all"
+                              className="h-10 w-10 rounded object-cover border-none hover:ring-2 hover:ring-accent transition-all"
                             />
                           </button>
                         ) : (
-                          <span className="text-xs text-gray-400">None</span>
+                          <span className="text-xs text-caption">None</span>
                         )}
                       </td>
 
                       {/* Description */}
                       <td className="px-4 py-4 max-w-xs">
-                        <div className="text-sm text-gray-700 truncate" title={report.description}>
-                          {report.description || <span className="text-gray-400 italic">No description</span>}
+                        <div className="text-sm text-body truncate" title={report.description}>
+                          {report.description || <span className="text-caption italic">No description</span>}
                         </div>
                       </td>
 
                       {/* Severity */}
                       <td className="px-4 py-4 whitespace-nowrap">
                         <div className="flex items-center">
-                          <div className={`h-2.5 w-2.5 rounded-full mr-2 ${
-                            report.severity >= 4 ? 'bg-red-500' :
-                            report.severity >= 3 ? 'bg-orange-500' : 'bg-blue-500'
+                          <div className={`h-2.5 w-2.5 rounded-sm mr-2 ${
+                            report.severity >= 4 ? 'bg-status-critical' :
+                            report.severity >= 3 ? 'bg-status-watch' : 'bg-status-clear'
                           }`}></div>
-                          <span className="text-sm text-gray-900">{report.severity}/5</span>
+                          <span className="text-sm text-primary">{report.severity}/5</span>
                         </div>
                       </td>
 
                       {/* Status badge */}
                       <td className="px-4 py-4 whitespace-nowrap">
-                        <span className={`px-2 py-0.5 inline-flex items-center gap-1 text-xs font-semibold rounded-full ${
-                          report.status === 'resolved' ? 'bg-green-100 text-green-800' :
-                          report.status === 'confirmed' ? 'bg-orange-100 text-orange-800' :
-                          'bg-gray-100 text-gray-800'
+                        <span className={`px-2 py-0.5 inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider rounded ${
+                          report.status === 'resolved' ? 'bg-status-clear/20 text-status-clear' :
+                          report.status === 'confirmed' ? 'bg-status-watch/20 text-status-watch' :
+                          'bg-raised text-caption'
                         }`}>
-                          {report.status === 'resolved' ? '🟢' : report.status === 'confirmed' ? '🟠' : '⚪'} {report.status}
+                          {report.status}
                         </span>
                       </td>
 
                       {/* Time */}
-                      <td className="px-4 py-4 whitespace-nowrap text-xs text-gray-500">
+                      <td className="px-4 py-4 whitespace-nowrap text-xs text-caption">
                         {formatTime(report)}
                       </td>
 
@@ -290,7 +290,7 @@ export default function ReportsPage() {
                             <button
                               onClick={() => updateStatus(report.id, 'confirmed')}
                               disabled={updatingId === report.id}
-                              className="text-xs px-2 py-1 bg-orange-100 text-orange-800 rounded hover:bg-orange-200 transition-colors disabled:opacity-50"
+                              className="text-xs px-3 py-1 bg-transparent border border-status-watch text-status-watch rounded-[100px] hover:bg-status-watch/10 transition-colors disabled:opacity-50"
                             >
                               Confirm
                             </button>
@@ -299,14 +299,14 @@ export default function ReportsPage() {
                             <button
                               onClick={() => updateStatus(report.id, 'resolved')}
                               disabled={updatingId === report.id}
-                              className="text-xs px-2 py-1 bg-green-100 text-green-800 rounded hover:bg-green-200 transition-colors disabled:opacity-50"
+                              className="text-xs px-3 py-1 bg-transparent border border-status-clear text-status-clear rounded-[100px] hover:bg-status-clear/10 transition-colors disabled:opacity-50"
                             >
                               Resolve
                             </button>
                           )}
                           <button
                             onClick={() => shareReport(report)}
-                            className="text-xs px-2 py-1 bg-blue-50 text-blue-700 rounded hover:bg-blue-100 transition-colors"
+                            className="text-xs px-3 py-1 bg-accent text-white rounded-[100px] hover:opacity-90 transition-opacity border-none"
                           >
                             📤 Share
                           </button>

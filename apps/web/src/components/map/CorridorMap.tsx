@@ -136,9 +136,9 @@ export default function CorridorMap() {
   const polylineCoords: [number, number][] = NH27_CORRIDOR.waypoints.map(wp => [wp.lat, wp.lng]);
 
   return (
-    <div className="relative w-full h-[400px] rounded-xl overflow-hidden border border-gray-200 shadow-sm z-0 mb-8">
+    <div className="relative w-full h-[400px] rounded-[24px] overflow-hidden z-0 mb-8 bg-void shadow-[inset_0_4px_24px_rgba(0,0,0,0.5)] border border-overlay">
       {isOffline && lastUpdated && (
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-[1000] bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-semibold border border-orange-200 shadow-md">
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-[1000] bg-status-watch/20 text-status-watch px-4 py-2 rounded-full text-sm font-semibold border border-status-watch/30">
           Live OSINT feed offline — last updated {getTimeAgo(lastUpdated)}.
         </div>
       )}
@@ -183,9 +183,9 @@ export default function CorridorMap() {
           return (
             <Marker key={event.id} position={[lat, lng]} icon={osintIcon}>
               <Popup>
-                <div className="font-semibold text-gray-900">{event.title}</div>
+                <div className="font-semibold text-void">{event.title}</div>
                 <div className="text-sm text-gray-500">Observed: {date}</div>
-                <div className="text-xs text-red-600 mt-1 uppercase tracking-wide font-bold">Live OSINT Data</div>
+                <div className="text-xs text-status-critical mt-1 uppercase tracking-[0.2em] font-bold">Live OSINT Data</div>
               </Popup>
             </Marker>
           );
@@ -205,19 +205,19 @@ export default function CorridorMap() {
           return (
             <Marker key={report.id} position={[report.lat!, report.lng!]} icon={incidentIcon(report.severity)}>
               <Popup minWidth={200}>
-                <div className="text-xs space-y-1">
-                  <div className="font-bold text-gray-900 text-sm">{typeLabel}</div>
+                <div className="text-xs space-y-1 text-void">
+                  <div className="font-bold text-sm">{typeLabel}</div>
                   <div><span className="font-semibold">Severity:</span> {report.severity}/5</div>
                   {report.description && <div><span className="font-semibold">Details:</span> {report.description}</div>}
                   <div>
                     <span className="font-semibold">GPS:</span>{' '}
-                    <a href={mapsUrl} target="_blank" rel="noreferrer" className="text-blue-600 underline">
+                    <a href={mapsUrl} target="_blank" rel="noreferrer" className="text-accent underline">
                       {report.lat!.toFixed(4)}, {report.lng!.toFixed(4)}
                     </a>
                   </div>
                   <div><span className="font-semibold">Status:</span> {report.status}</div>
                   <div><span className="font-semibold">Filed:</span> {createdStr}</div>
-                  <div className="pt-1 text-red-600 font-bold uppercase tracking-wide">🔴 Live Incident</div>
+                  <div className="pt-1 text-status-critical font-bold uppercase tracking-[0.2em]">🔴 Live Incident</div>
                 </div>
               </Popup>
             </Marker>

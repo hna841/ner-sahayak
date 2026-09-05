@@ -42,28 +42,28 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
+    <div className="min-h-screen flex items-center justify-center bg-void px-4">
+      <div className="max-w-md w-full bg-panel rounded-[24px] p-8 border border-overlay">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">NER Sahayak</h1>
-          <p className="text-gray-500 mt-2">Control Room Login</p>
+          <h1 className="text-3xl font-bold text-primary">NER Sahayak</h1>
+          <p className="text-caption mt-2">Control Room Login</p>
         </div>
 
         {error && (
-          <div className="bg-red-50 text-red-600 p-3 rounded-lg mb-6 text-sm">
+          <div className="bg-status-critical/20 text-status-critical p-3 rounded-[12px] mb-6 text-sm">
             {error}
           </div>
         )}
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-body mb-2">
               Email
             </label>
             <input
               type="email"
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+              className="w-full px-4 py-2 bg-raised border border-overlay rounded-[12px] text-primary focus:ring-2 focus:ring-accent focus:border-accent outline-none transition-colors"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="officer@nersahayak.in"
@@ -71,13 +71,13 @@ export default function LoginPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-body mb-2">
               Password
             </label>
             <input
               type="password"
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+              className="w-full px-4 py-2 bg-raised border border-overlay rounded-[12px] text-primary focus:ring-2 focus:ring-accent focus:border-accent outline-none transition-colors"
               value={password}
               onChange={(e) => setPassword(e.target.value)} /* Bug Fix #1: No duplicated arrow */
               placeholder="••••••••"
@@ -87,22 +87,22 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white font-medium py-2.5 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+            className="w-full bg-accent text-white font-bold py-3 rounded-[100px] hover:opacity-90 transition-opacity disabled:opacity-50"
           >
             {loading ? 'Signing in...' : 'Sign In with Email'}
           </button>
         </form>
 
         <div className="mt-6 flex items-center">
-          <div className="flex-grow border-t border-gray-200"></div>
-          <span className="mx-4 text-sm text-gray-400">or</span>
-          <div className="flex-grow border-t border-gray-200"></div>
+          <div className="flex-grow border-t border-overlay"></div>
+          <span className="mx-4 text-sm text-caption">or</span>
+          <div className="flex-grow border-t border-overlay"></div>
         </div>
 
         <button
           onClick={handleGoogleLogin}
           disabled={loading}
-          className="mt-6 w-full flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-700 font-medium py-2.5 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50"
+          className="mt-6 w-full flex items-center justify-center gap-3 bg-raised border border-overlay text-primary font-bold py-3 rounded-[100px] hover:bg-panel transition-colors disabled:opacity-50"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path
@@ -125,7 +125,7 @@ export default function LoginPage() {
           Sign in with Google
         </button>
         
-        <div className="mt-6 text-center text-sm text-gray-500">
+        <div className="mt-6 text-center text-sm text-caption">
           Control room access is provisioned by an administrator.
         </div>
       </div>

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, IBM_Plex_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import { AuthProvider } from "@/components/AuthProvider";
 
-const inter = Inter({
-  variable: "--font-inter",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 const plexMono = IBM_Plex_Mono({
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${plexMono.variable} font-sans antialiased flex min-h-screen bg-gray-100`}
+        className={`${jakarta.variable} ${plexMono.variable} font-sans antialiased flex min-h-screen bg-void text-body`}
       >
         <AuthProvider>
           <Navigation />
